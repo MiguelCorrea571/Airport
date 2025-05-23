@@ -4,10 +4,10 @@
  */
 package airport.view;
 
-import airport.Flight;
-import airport.Location;
-import airport.Passenger;
-import airport.Plane;
+import airport.model.Flight;
+import airport.model.Location;
+import airport.model.Passenger;
+import airport.model.Plane;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
 import java.time.LocalDate;
@@ -101,8 +101,8 @@ public class AirportFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelRound1 = new airport.PanelRound();
-        panelRound2 = new airport.PanelRound();
+        panelRound1 = new airport.view.PanelRound();
+        panelRound2 = new airport.view.PanelRound();
         jButton13 = new javax.swing.JButton();
         PlanesTable = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -239,7 +239,7 @@ public class AirportFrame extends javax.swing.JFrame {
         jLabel48 = new javax.swing.JLabel();
         MINUTE2 = new javax.swing.JComboBox<>();
         jButton7 = new javax.swing.JButton();
-        panelRound3 = new airport.PanelRound();
+        panelRound3 = new airport.view.PanelRound();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -1858,9 +1858,9 @@ public class AirportFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable4;
-    private airport.PanelRound panelRound1;
-    private airport.PanelRound panelRound2;
-    private airport.PanelRound panelRound3;
+    private airport.view.PanelRound panelRound1;
+    private airport.view.PanelRound panelRound2;
+    private airport.view.PanelRound panelRound3;
     private javax.swing.JRadioButton user;
     private javax.swing.JComboBox<String> userSelect;
     // End of variables declaration//GEN-END:variables
