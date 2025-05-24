@@ -34,9 +34,7 @@ public class Passenger {
         this.flights = new ArrayList<>();
     }
 
-    public void addFlight(Flight flight) {
-        this.flights.add(flight);
-    }
+    
     
     public long getId() {
         return id;
@@ -106,8 +104,5 @@ public class Passenger {
         return Period.between(birthDate, LocalDate.now()).getYears();
     }
     
-    public int getNumFlights() {
-        return flights.size();
-    }
-    
+   
 }
