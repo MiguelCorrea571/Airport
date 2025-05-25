@@ -55,9 +55,9 @@ public class Flight {
         this.plane.addFlight(this);
     }
     
-    public void addPassenger(Passenger passenger) {
-        this.passengers.add(passenger);
-    }
+    
+    
+    
     
     public String getId() {
         return id;
@@ -110,9 +110,10 @@ public class Flight {
     public void delay(int hours, int minutes) {
         this.departureDate = this.departureDate.plusHours(hours).plusMinutes(minutes);
     }
-    
-    public int getNumPassengers() {
-        return passengers.size();
+
+    public ArrayList<Passenger> getPassengers() {
+        return passengers;
     }
+   
     
 }
