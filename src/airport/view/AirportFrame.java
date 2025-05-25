@@ -7,13 +7,12 @@ package airport.view;
 import airport.model.Flight;
 import airport.model.Location;
 import airport.model.Passenger;
+import airport.model.PassengerManager;
 import airport.model.Plane;
-import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -960,6 +959,11 @@ public class AirportFrame extends javax.swing.JFrame {
 
         FLIGHT.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         FLIGHT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Flight" }));
+        FLIGHT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FLIGHTActionPerformed(evt);
+            }
+        });
 
         AddButton.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         AddButton.setText("Add");
@@ -1604,9 +1608,9 @@ public class AirportFrame extends javax.swing.JFrame {
                 flight = f;
             }
         }
-
-        passenger.addFlight(flight);
-        flight.addPassenger(passenger);
+        PassengerManager manager = new PassengerManager();
+        manager.addFlight(flight,passenger);
+        manager.addPassenger(passenger, flight);
     }//GEN-LAST:event_AddButtonActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -1718,6 +1722,10 @@ public class AirportFrame extends javax.swing.JFrame {
     private void MONTH1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MONTH1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MONTH1ActionPerformed
+
+    private void FLIGHTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FLIGHTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FLIGHTActionPerformed
 
     /**
      * @param args the command line arguments

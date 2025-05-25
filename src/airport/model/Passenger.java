@@ -103,6 +103,11 @@ public class Passenger {
     public int calculateAge() {
         return Period.between(birthDate, LocalDate.now()).getYears();
     }
-    
+    public void addFlight(Flight flight){
+        this.flights.add(flight);
+    }
+    public int getNumFlights(){
+        return flights.size();
+    }
    
 }

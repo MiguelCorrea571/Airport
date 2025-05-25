@@ -34,8 +34,7 @@ public class Flight {
         this.arrivalLocation = arrivalLocation;
         this.departureDate = departureDate;
         this.hoursDurationArrival = hoursDurationArrival;
-        this.minutesDurationArrival = minutesDurationArrival;
-        
+        this.minutesDurationArrival = minutesDurationArrival;        
         this.plane.addFlight(this);
     }
 
@@ -114,6 +113,11 @@ public class Flight {
     public ArrayList<Passenger> getPassengers() {
         return passengers;
     }
-   
+     public void addPassenger(Passenger passenger) {
+        this.passengers.add(passenger);
+    }
+     public int getNumPassengers(){
+         return passengers.size();
+     }
     
 }

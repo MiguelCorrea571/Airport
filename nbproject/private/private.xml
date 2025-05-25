@@ -8,6 +8,11 @@
             <file>file:/C:/Users/pc/Airport/src/airport/view/PanelRound.java</file>
             <file>file:/C:/Users/pc/Airport/src/airport/model/Location.java</file>
             <file>file:/C:/Users/pc/Airport/src/airport/model/Flight.java</file>
+            <file>file:/C:/Users/pc/Airport/src/airport/controller/Controller.java</file>
+            <file>file:/C:/Users/pc/Airport/src/airport/model/Passenger.java</file>
+            <file>file:/C:/Users/pc/Airport/src/airport/model/Plane.java</file>
+            <file>file:/C:/Users/pc/Airport/src/airport/model/PassengerManager.java</file>
+            <file>file:/C:/Users/pc/Airport/src/airport/model/FlightRegistry.java</file>
         </group>
     </open-files>
 </project-private>
