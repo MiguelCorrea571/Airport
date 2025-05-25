@@ -7,7 +7,6 @@ package airport.view;
 import airport.model.Flight;
 import airport.model.Location;
 import airport.model.Passenger;
-import airport.model.PassengerManager;
 import airport.model.Plane;
 import java.awt.Color;
 import java.time.LocalDate;
@@ -1608,9 +1607,8 @@ public class AirportFrame extends javax.swing.JFrame {
                 flight = f;
             }
         }
-        PassengerManager manager = new PassengerManager();
-        manager.addFlight(flight,passenger);
-        manager.addPassenger(passenger, flight);
+        passenger.addFlight(flight);
+        flight.addPassenger(passenger);
     }//GEN-LAST:event_AddButtonActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
