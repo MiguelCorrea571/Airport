@@ -8,6 +8,6 @@ package airport.controller;
  *
  * @author pc
  */
-public class Controller {
+public class PassController {
     
 }
