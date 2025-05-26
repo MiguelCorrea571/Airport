@@ -17,6 +17,7 @@ import airport.model.Flight;
 import airport.model.Location;
 import airport.model.Passenger;
 import airport.model.Plane;
+import airport.model.PlaneFlightsManager;
 import airport.model.storage.FlightsStorage;
 import airport.model.storage.LocationsStorage;
 import airport.model.storage.PassengersStorage;
@@ -64,6 +65,7 @@ public class AirportFrame extends javax.swing.JFrame {
     private PlanesStorage planes = PlanesStorage.getInstance();
     private LocationsStorage locations = LocationsStorage.getInstance();
     private FlightsStorage flights = FlightsStorage.getInstance();
+    public PlaneFlightsManager planemanagement = new PlaneFlightsManager();
 
     public AirportFrame() {
         initComponents();
@@ -77,29 +79,29 @@ public class AirportFrame extends javax.swing.JFrame {
         this.generateMinutes();
         this.blockPanels();
         Loader();
-        JTabbedPane.addChangeListener(new ChangeListener(){
-        public void stateChanged(ChangeEvent e){
-            int selectedindex = JTabbedPane.getSelectedIndex();
-            switch(selectedindex){
-                case 7:{
-                    RefreshButton.doClick();
+        JTabbedPane.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                int selectedindex = JTabbedPane.getSelectedIndex();
+                switch (selectedindex) {
+                    case 7: {
+                        RefreshButton.doClick();
+                    }
+                    case 8: {
+                        RefreshButton1.doClick();
+                    }
+                    case 9: {
+                        RefreshButton2.doClick();
+                    }
+                    case 10: {
+                        RefreshButton3.doClick();
+                    }
+                    case 11: {
+                        RefreshButton4.doClick();
+                    }
+
                 }
-                case 8:{
-                    RefreshButton1.doClick();
-                }
-                case 9:{
-                    RefreshButton2.doClick();
-                }
-                case 10:{
-                    RefreshButton3.doClick();
-                }
-                case 11:{
-                    RefreshButton4.doClick();
-                }
-                    
             }
-        }
-    });
+        });
     }
 
     private void blockPanels() {
@@ -1497,8 +1499,8 @@ public class AirportFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    public void Loader(){
+
+    public void Loader() {
         LoadController.Load(PLANE, DEPARTURELOCATION, ARRIVALLOCATION, SCALELOCATION, ID, FLIGHT);
     }
     private void panelRound2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound2MousePressed
@@ -1520,8 +1522,8 @@ public class AirportFrame extends javax.swing.JFrame {
             JTabbedPane.setEnabledAt(i, true);
         }
         JTabbedPane.setEnabledAt(5, false);
-        JTabbedPane.setEnabledAt(6, false);        
-        JTabbedPane.setEnabledAt(7, false);        
+        JTabbedPane.setEnabledAt(6, false);
+        JTabbedPane.setEnabledAt(7, false);
     }//GEN-LAST:event_administratorActionPerformed
 
     private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
@@ -1564,35 +1566,35 @@ public class AirportFrame extends javax.swing.JFrame {
 
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
         try {
-    String idStr = IDTextField1.getText().trim();
-    String firstname = FirstNameTextField.getText().trim();
-    String lastname = LastNameTextField.getText().trim();
-    String yearStr = YEAR.getText().trim();
-    String monthStr = MONTH.getItemAt(MONTH.getSelectedIndex()).trim();
-    String dayStr = DAY.getItemAt(DAY.getSelectedIndex()).trim();
-    String phoneCodeStr = CountryCodeTextField.getText().trim();
-    String phoneStr = PhoneTextField.getText().trim();
-    String country = CountryTextField.getText().trim();
+            String idStr = IDTextField1.getText().trim();
+            String firstname = FirstNameTextField.getText().trim();
+            String lastname = LastNameTextField.getText().trim();
+            String yearStr = YEAR.getText().trim();
+            String monthStr = MONTH.getItemAt(MONTH.getSelectedIndex()).trim();
+            String dayStr = DAY.getItemAt(DAY.getSelectedIndex()).trim();
+            String phoneCodeStr = CountryCodeTextField.getText().trim();
+            String phoneStr = PhoneTextField.getText().trim();
+            String country = CountryTextField.getText().trim();
 
-    Response response = PassController.createPassenger(idStr, firstname, lastname, yearStr, monthStr, dayStr, phoneCodeStr, phoneStr, country);
-    if (response.getStatus() != Status.CREATED) {
-        JOptionPane.showMessageDialog(this, response.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+            Response response = PassController.createPassenger(idStr, firstname, lastname, yearStr, monthStr, dayStr, phoneCodeStr, phoneStr, country);
+            if (response.getStatus() != Status.CREATED) {
+                JOptionPane.showMessageDialog(this, response.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-    long id = Long.parseLong(idStr);
-    int year = Integer.parseInt(yearStr);
-    int month = Integer.parseInt(monthStr);
-    int day = Integer.parseInt(dayStr);
-    int phoneCode = Integer.parseInt(phoneCodeStr);
-    long phone = Long.parseLong(phoneStr);
-    LocalDate birthDate = LocalDate.of(year, month, day);
+            long id = Long.parseLong(idStr);
+            int year = Integer.parseInt(yearStr);
+            int month = Integer.parseInt(monthStr);
+            int day = Integer.parseInt(dayStr);
+            int phoneCode = Integer.parseInt(phoneCodeStr);
+            long phone = Long.parseLong(phoneStr);
+            LocalDate birthDate = LocalDate.of(year, month, day);
 
-    Passenger p = PassController.createrPassenger(id, firstname, lastname, birthDate, phoneCode, phone, country);
-    this.passengers.addPassenger(p);
-    this.userSelect.addItem(String.valueOf(id));
+            Passenger p = PassController.createrPassenger(id, firstname, lastname, birthDate, phoneCode, phone, country);
+            this.passengers.addPassenger(p);
+            this.userSelect.addItem(String.valueOf(id));
 
-    File file = new File("json/passengers.json");
+            File file = new File("json/passengers.json");
             JSONArray passengerArray;
             if (file.exists()) {
                 try (InputStream is = new FileInputStream(file)) {
@@ -1607,7 +1609,7 @@ public class AirportFrame extends javax.swing.JFrame {
             passengerObject.put("id", idStr);
             passengerObject.put("firstname", firstname);
             passengerObject.put("lastname", lastname);
-            passengerObject.put("birthDate", birthDate);            
+            passengerObject.put("birthDate", birthDate);
             passengerObject.put("countryPhoneCode", phoneCodeStr);
             passengerObject.put("phone", phoneStr);
             passengerObject.put("country", country);
@@ -1618,15 +1620,15 @@ public class AirportFrame extends javax.swing.JFrame {
                 writer.write(passengerArray.toString(4));
             }
 
-    JOptionPane.showMessageDialog(this, "Pasajero registrado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Pasajero registrado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
-} catch (NumberFormatException e) {
-    JOptionPane.showMessageDialog(this, "Error de formato numérico: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-} catch (DateTimeException e) {
-    JOptionPane.showMessageDialog(this, "Fecha de nacimiento inválida: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-} catch (IOException e) {
-    JOptionPane.showMessageDialog(this, "Error al escribir en el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-}
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error de formato numérico: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (DateTimeException e) {
+            JOptionPane.showMessageDialog(this, "Fecha de nacimiento inválida: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al escribir en el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
 
     }//GEN-LAST:event_RegisterButtonActionPerformed
@@ -1644,7 +1646,7 @@ public class AirportFrame extends javax.swing.JFrame {
                 return;
             }
             int maxCapacity = Integer.parseInt(maxCapacityStr);
-            this.planes.addPlane(new Plane(id, brand, model, maxCapacity, airline));            
+            this.planes.addPlane(AirplaneController.createPlane(id, brand, model, maxCapacity, airline));
             System.out.println(id);
             this.PLANE.addItem(id);
 
@@ -1700,7 +1702,7 @@ public class AirportFrame extends javax.swing.JFrame {
         double latitude = Double.parseDouble(latitudeStr);
         double longitude = Double.parseDouble(longitudeStr);
 
-        this.locations.addLocation(new Location(id, name, city, country, latitude, longitude));
+        this.locations.addLocation(LocationController.createLocation(id, name, city, country, latitude, longitude));
 
         this.DEPARTURELOCATION.addItem(id);
         this.ARRIVALLOCATION.addItem(id);
@@ -1799,7 +1801,13 @@ public class AirportFrame extends javax.swing.JFrame {
         LocalDateTime departureDate = LocalDateTime.of(year, month, day, hour, minutes);
 
         String scaleIdForFile = (scaleLocationId == null || scaleLocationId.trim().isEmpty()) ? "null" : scaleLocationId;
-
+        Flight flight;
+        if (scaleLocationId == null) {
+            flight = FlightsController.createFlight(id, planes.getPlane(planeId), locations.getLocation(departureLocationId), locations.getLocation(scaleLocationId), locations.getLocation(arrivalLocationId), departureDate, hoursDurationsArrival, minutesDurationsArrival, hoursDurationsScale, minutesDurationsScale);
+        } else {
+            flight = FlightsController.createFlight(id, planes.getPlane(planeId), locations.getLocation(departureLocationId), locations.getLocation(arrivalLocationId), departureDate, hoursDurationsArrival, minutesDurationsArrival);
+        }
+        planemanagement.addFlight(planes.getPlane(planeId), flight);
         try {
             File file = new File("json/flights.json");
             JSONArray flightsArray;
@@ -1843,7 +1851,7 @@ public class AirportFrame extends javax.swing.JFrame {
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
         // TODO add your handling code here:
-        String idStr = IDTextField4.getText();        
+        String idStr = IDTextField4.getText();
         String firstname = FirstNameTextField1.getText();
         String lastname = LastNameTextField1.getText();
         String yearStr = YEAR2.getText();
@@ -1853,8 +1861,8 @@ public class AirportFrame extends javax.swing.JFrame {
         String phoneStr = PhoneTextField1.getText();
         String country = CountryTextField1.getText();
 
-        Response response = UpdateInfor.validateAndUpdate(idStr, firstname, lastname,yearStr, monthStr, dayStr,phoneCodeStr, phoneStr, country);
-        System.out.println("RESPUESTA"+response.getMessage());
+        Response response = UpdateInfor.validateAndUpdate(idStr, firstname, lastname, yearStr, monthStr, dayStr, phoneCodeStr, phoneStr, country);
+        System.out.println("RESPUESTA" + response.getMessage());
         if (response.getStatus() != Status.CREATED) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
             return;
@@ -1869,7 +1877,7 @@ public class AirportFrame extends javax.swing.JFrame {
         LocalDate birthDate = LocalDate.of(year, month, day);
 
         File file = new File("json/passengers.json");
-        System.out.println("ruta "+file.getAbsolutePath());
+        System.out.println("ruta " + file.getAbsolutePath());
         if (!file.exists()) {
             JOptionPane.showMessageDialog(null, "No se encontró el archivo passengers.json", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -1878,7 +1886,7 @@ public class AirportFrame extends javax.swing.JFrame {
         JSONArray passengersArray;
         try (InputStream is = new FileInputStream(file)) {
             passengersArray = new JSONArray(new JSONTokener(is));
-        } catch (IOException | JSONException e) {            
+        } catch (IOException | JSONException e) {
             JOptionPane.showMessageDialog(null, "Error leyendo archivo JSON: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -2035,10 +2043,10 @@ public class AirportFrame extends javax.swing.JFrame {
                 }
 
                 // Crear instancia de Flight (se usan datos mínimos necesarios)
-                Plane TemporalPlane = new Plane(obj.getString("plane"), "", "", 0, "");
-                Location TemporalDeparture = new Location(obj.getString("departureLocation"), "", "", "", 0, 0);
-                Location TemporalArrival = new Location(obj.getString("arrivalLocation"), "", "", "", 0, 0);
-                Location TemporalScale = obj.isNull("scaleLocation") ? null : new Location(obj.getString("scaleLocation"), "", "", "", 0, 0);
+                Plane TemporalPlane = AirplaneController.createPlane(obj.getString("plane"), "", "", 0, "");
+                Location TemporalDeparture = LocationController.createLocation(obj.getString("departureLocation"), "", "", "", 0, 0);
+                Location TemporalArrival = LocationController.createLocation(obj.getString("arrivalLocation"), "", "", "", 0, 0);
+                Location TemporalScale = obj.isNull("scaleLocation") ? null : LocationController.createLocation(obj.getString("scaleLocation"), "", "", "", 0, 0);
 
                 int hoursDurationScale = obj.optInt("hoursDurationScale", 0);
                 int minutesDurationScale = obj.optInt("minutesDurationScale", 0);
@@ -2047,9 +2055,9 @@ public class AirportFrame extends javax.swing.JFrame {
 
                 Flight flight;
                 if (TemporalScale == null) {
-                    flight = new Flight(flightId, TemporalPlane, TemporalDeparture, TemporalArrival, departureDate, hoursDurationArrival, minutesDurationArrival);
+                    flight = FlightsController.createFlight(flightId, TemporalPlane, TemporalDeparture, TemporalArrival, departureDate, hoursDurationArrival, minutesDurationArrival);
                 } else {
-                    flight = new Flight(flightId, TemporalPlane, TemporalDeparture, TemporalScale, TemporalArrival, departureDate, hoursDurationArrival, minutesDurationArrival, hoursDurationScale, minutesDurationScale);
+                    flight = FlightsController.createFlight(flightId, TemporalPlane, TemporalDeparture, TemporalScale, TemporalArrival, departureDate, hoursDurationArrival, minutesDurationArrival, hoursDurationScale, minutesDurationScale);
                 }
 
                 // Usar método delay
@@ -2206,18 +2214,18 @@ public class AirportFrame extends javax.swing.JFrame {
                 int hoursDurationArrival = obj.optInt("hoursDurationArrival", 0);
                 int minutesDurationArrival = obj.optInt("minutesDurationArrival", 0);
 
-                Plane plane = new Plane(planeId, "", "", 0, "");
-                Location departureLocation = new Location(departureLocationId, "", "", "", 0, 0);
-                Location arrivalLocation = new Location(arrivalLocationId, "", "", "", 0, 0);
-                Location scaleLocation = scaleLocationId == null ? null : new Location(scaleLocationId, "", "", "", 0, 0);
+                Plane plane = AirplaneController.createPlane(planeId, "", "", 0, "");
+                Location departureLocation = LocationController.createLocation(departureLocationId, "", "", "", 0, 0);
+                Location arrivalLocation = LocationController.createLocation(arrivalLocationId, "", "", "", 0, 0);
+                Location scaleLocation = scaleLocationId == null ? null : LocationController.createLocation(scaleLocationId, "", "", "", 0, 0);
 
                 // Crear objeto Flight
                 Flight flight;
                 if (scaleLocation == null) {
-                    flight = new Flight(id, plane, departureLocation, arrivalLocation, departureDate,
+                    flight = FlightsController.createFlight(id, plane, departureLocation, arrivalLocation, departureDate,
                             hoursDurationArrival, minutesDurationArrival);
                 } else {
-                    flight = new Flight(id, plane, departureLocation, scaleLocation, arrivalLocation, departureDate,
+                    flight = FlightsController.createFlight(id, plane, departureLocation, scaleLocation, arrivalLocation, departureDate,
                             hoursDurationArrival, minutesDurationArrival, hoursDurationScale, minutesDurationScale);
                 }
 
@@ -2342,7 +2350,7 @@ public class AirportFrame extends javax.swing.JFrame {
                 double latitude = obj.getDouble("airportLatitude");
                 double longitude = obj.getDouble("airportLongitude");
 
-                Location location = new Location(id, name, city, country, latitude, longitude);
+                Location location = LocationController.createLocation(id, name, city, country, latitude, longitude);
                 this.locations.addLocation(location);
 
                 model.addRow(new Object[]{id, name, city, country});

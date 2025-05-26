@@ -6,6 +6,9 @@ package airport.controller;
 
 import airport.controller.utils.Response;
 import airport.controller.utils.Status;
+import airport.model.Flight;
+import airport.model.Location;
+import airport.model.Plane;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
@@ -14,26 +17,35 @@ import java.time.LocalDateTime;
  * @author pc
  */
 public class FlightsController {
+
     public static Response validateFlightData(
-        String id,
-        String planeId,
-        String departureLocationId,
-        String arrivalLocationId,
-        String scaleLocationId,
-        String yearStr,
-        String monthStr,
-        String dayStr,
-        String hourStr,
-        String minuteStr,
-        String durationHourStr,
-        String durationMinuteStr,
-        String scaleDurationHourStr,
-        String scaleDurationMinuteStr
+            String id,
+            String planeId,
+            String departureLocationId,
+            String arrivalLocationId,
+            String scaleLocationId,
+            String yearStr,
+            String monthStr,
+            String dayStr,
+            String hourStr,
+            String minuteStr,
+            String durationHourStr,
+            String durationMinuteStr,
+            String scaleDurationHourStr,
+            String scaleDurationMinuteStr
     ) {
-        if (id == null || id.trim().isEmpty()) return new Response("ID no puede estar vacío", Status.BAD_REQUEST);
-        if (planeId == null || planeId.trim().isEmpty()) return new Response("Debe seleccionar un avión", Status.BAD_REQUEST);
-        if (departureLocationId == null || departureLocationId.trim().isEmpty()) return new Response("Debe seleccionar lugar de salida", Status.BAD_REQUEST);
-        if (arrivalLocationId == null || arrivalLocationId.trim().isEmpty()) return new Response("Debe seleccionar lugar de llegada", Status.BAD_REQUEST);
+        if (id == null || id.trim().isEmpty()) {
+            return new Response("ID no puede estar vacío", Status.BAD_REQUEST);
+        }
+        if (planeId == null || planeId.trim().isEmpty()) {
+            return new Response("Debe seleccionar un avión", Status.BAD_REQUEST);
+        }
+        if (departureLocationId == null || departureLocationId.trim().isEmpty()) {
+            return new Response("Debe seleccionar lugar de salida", Status.BAD_REQUEST);
+        }
+        if (arrivalLocationId == null || arrivalLocationId.trim().isEmpty()) {
+            return new Response("Debe seleccionar lugar de llegada", Status.BAD_REQUEST);
+        }
 
         try {
             int year = Integer.parseInt(yearStr);
@@ -50,13 +62,17 @@ public class FlightsController {
         try {
             int durHour = Integer.parseInt(durationHourStr);
             int durMinute = Integer.parseInt(durationMinuteStr);
-            if (durHour < 0 || durMinute < 0) return new Response("Duración inválida", Status.BAD_REQUEST);
+            if (durHour < 0 || durMinute < 0) {
+                return new Response("Duración inválida", Status.BAD_REQUEST);
+            }
 
-            if (scaleDurationHourStr != null && !scaleDurationHourStr.isEmpty() &&
-                scaleDurationMinuteStr != null && !scaleDurationMinuteStr.isEmpty()) {
+            if (scaleDurationHourStr != null && !scaleDurationHourStr.isEmpty()
+                    && scaleDurationMinuteStr != null && !scaleDurationMinuteStr.isEmpty()) {
                 int scaleDurHour = Integer.parseInt(scaleDurationHourStr);
                 int scaleDurMinute = Integer.parseInt(scaleDurationMinuteStr);
-                if (scaleDurHour < 0 || scaleDurMinute < 0) return new Response("Duración de escala inválida", Status.BAD_REQUEST);
+                if (scaleDurHour < 0 || scaleDurMinute < 0) {
+                    return new Response("Duración de escala inválida", Status.BAD_REQUEST);
+                }
             }
         } catch (NumberFormatException e) {
             return new Response("Duración inválida", Status.BAD_REQUEST);
@@ -64,5 +80,12 @@ public class FlightsController {
 
         return new Response("Validación exitosa", Status.CREATED);
     }
-    
+
+    public static Flight createFlight(String id, Plane plane, Location departureLocation, Location scaleLocation, Location arrivalLocation, LocalDateTime departureDate, int hoursDurationArrival, int minutesDurationArrival, int hoursDurationScale, int minutesDurationScale) {
+        return new Flight(id,plane,departureLocation,scaleLocation,arrivalLocation,departureDate,hoursDurationArrival,minutesDurationArrival,hoursDurationScale,minutesDurationScale);
+    }
+
+    public static Flight createFlight(String id, Plane plane, Location departureLocation, Location arrivalLocation, LocalDateTime departureDate, int hoursDurationArrival, int minutesDurationArrival) {
+        return new Flight(id,plane,departureLocation,arrivalLocation,departureDate,hoursDurationArrival,minutesDurationArrival);
+    }
 }

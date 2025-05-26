@@ -9,16 +9,10 @@ package airport.model;
  * @author pc
  */
 public class ContactInfo {
-    private final int countryPhoneCode;
-    private final long phone;
+    
 
-    public ContactInfo(int countryPhoneCode, long phone) {
-        this.countryPhoneCode = countryPhoneCode;
-        this.phone = phone;
-    }
-
-    public String getFormattedPhone() {
-        return "+" + countryPhoneCode + " " + phone;
+    public static String getFormattedPhone(Passenger passenger) {
+        return "+" + passenger.getCountryPhoneCode() + " " + passenger.getPhone();
     }
 }
 

@@ -6,6 +6,7 @@ package airport.controller;
 
 import airport.controller.utils.Response;
 import airport.controller.utils.Status;
+import airport.model.ContactInfo;
 import airport.model.Passenger;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ import java.time.Period;
  * @author pc
  */
 public class PassController {
+    private static ContactInfo contactInfo= new ContactInfo();
 
     public static Response createPassenger(String idStr, String firstName, String lastName, String yearStr, String monthStr, String dayStr, String phoneCodeStr, String phoneStr, String country) {
 
@@ -87,13 +89,13 @@ public class PassController {
         return new Passenger(id, firstname,lastname,birthDate,countryPhoneCode,phone,country);
     }
     public static int getAge(Passenger passenger){
-        return passenger.calculateAge();
+        return passenger.getAge();
     }
     public static String getFullname(Passenger passenger) {
-        return passenger.getFullname();
+        return passenger.getFullName();
     }
     
     public static String generateFullPhone(Passenger passenger) {
-        return passenger.generateFullPhone();
+        return contactInfo.getFormattedPhone(passenger);
     }
 }

@@ -18,6 +18,7 @@ public class Flight implements FlightInterface {
     private int hoursDurationScale;
     private int minutesDurationScale;
     private final ArrayList<Passenger> passengers;
+    private PlaneFlightsManager planeManagement= new PlaneFlightsManager();
 
     public Flight(String id, Plane plane, Location departureLocation, Location arrivalLocation, LocalDateTime departureDate, int hoursDurationArrival, int minutesDurationArrival) {
         this.id = id;
@@ -28,7 +29,7 @@ public class Flight implements FlightInterface {
         this.hoursDurationArrival = hoursDurationArrival;
         this.minutesDurationArrival = minutesDurationArrival;
         this.passengers = new ArrayList<>();
-        this.plane.addFlight(this);
+        planeManagement.addFlight(plane, this);
     }
 
     public Flight(String id, Plane plane, Location departureLocation, Location scaleLocation, Location arrivalLocation, LocalDateTime departureDate, int hoursDurationArrival, int minutesDurationArrival, int hoursDurationScale, int minutesDurationScale) {
@@ -43,7 +44,7 @@ public class Flight implements FlightInterface {
         this.hoursDurationScale = hoursDurationScale;
         this.minutesDurationScale = minutesDurationScale;
         this.passengers = new ArrayList<>();
-        this.plane.addFlight(this);
+        planeManagement.addFlight(plane, this);
     }
 
     @Override

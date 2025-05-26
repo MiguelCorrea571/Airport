@@ -20,6 +20,7 @@ import java.util.List;
  * @author pc
  */
 public class LocationController {
+
     // Usamos ruta absoluta a la carpeta json dentro del directorio base del proyecto
     private static final String DIRECTORY = System.getProperty("user.dir") + File.separator + "json";
     private static final String FILE_PATH = DIRECTORY + File.separator + "locations.json";
@@ -142,5 +143,9 @@ public class LocationController {
         try (FileWriter writer = new FileWriter(FILE_PATH)) {
             writer.write(jsonArray.toString(4));
         }
+    }
+
+    public static Location createLocation(String airportId, String airportName, String airportCity, String airportCountry, double airportLatitude, double airportLongitude) {
+        return new Location(airportId, airportName, airportCity, airportCountry, airportLatitude, airportLongitude);
     }
 }

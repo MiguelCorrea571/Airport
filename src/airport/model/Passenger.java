@@ -1,5 +1,5 @@
 package airport.model;
-     
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -10,18 +10,20 @@ public class Passenger {
     private String firstname;
     private String lastname;
     private LocalDate birthDate;
-    private ContactInfo contactInfo;
-    private ArrayList<Flight> flights;
-    private PassengerFlightHistory flighHistory;
+    private int countryPhoneCode;
+    private long phone;
+    private String country;
+    private ArrayList<Flight> flights;    
 
-    public Passenger(long id, String firstname, String lastname, LocalDate birthDate,
-            ContactInfo contactInfo, PassengerFlightHistory passengerflightHistory) {
+    public Passenger(long id, String firstname, String lastname, LocalDate birthDate, int countryPhoneCode,long phone,String country) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.birthDate = birthDate;
-        this.contactInfo = contactInfo;
-        this.flighHistory = passengerflightHistory;
+        this.countryPhoneCode = countryPhoneCode;
+        this.phone=phone;
+        this.country=country;
+        this.flights = new ArrayList<Flight>();
     }
 
     public String getFullName() {
@@ -35,16 +37,34 @@ public class Passenger {
     public long getId() {
         return id;
     }
-
-    public ContactInfo getContactInfo() {
-        return contactInfo;
-    }
+    
 
     public ArrayList<Flight> getFlights() {
         return flights;
     }
-    
-    public PassengerFlightHistory getFlightHistory() {
-        return flighHistory;
+
+    public int getCountryPhoneCode() {
+        return countryPhoneCode;
     }
+
+    public long getPhone() {
+        return phone;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountryPhoneCode(int countryPhoneCode) {
+        this.countryPhoneCode = countryPhoneCode;
+    }
+
+    public void setPhone(long phone) {
+        this.phone = phone;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+    
 }
