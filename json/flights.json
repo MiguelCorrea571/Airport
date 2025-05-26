@@ -4,6 +4,7 @@
         "minutesDurationScale": 0,
         "departureLocation": "JFK",
         "scaleLocation": null,
+        "registeredPassengers": "158484546",
         "minutesDurationArrival": 15,
         "id": "FLY001",
         "departureDate": "2025-06-01T14:30:00",

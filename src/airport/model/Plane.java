@@ -28,9 +28,7 @@ public class Plane {
         this.flights = new ArrayList<>();
     }
 
-    public void addFlight(Flight flight) {
-        this.flights.add(flight);
-    }
+    
     
     public String getId() {
         return id;
@@ -56,8 +54,5 @@ public class Plane {
         return flights;
     }
     
-    public int getNumFlights() {
-        return flights.size();
-    }
     
 }
