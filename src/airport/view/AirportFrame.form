@@ -879,7 +879,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                                          <Component id="MONTH2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="HOUR0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="jLabel32" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
@@ -888,7 +888,7 @@
                                       <Component id="jLabel33" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                                          <Component id="DAY2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="MINUTE0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
@@ -947,10 +947,10 @@
                           </Group>
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="MONTH2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="HOUR0" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel32" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel33" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="DAY2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="MINUTE0" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -1030,6 +1030,9 @@
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PLANEActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -1068,6 +1071,9 @@
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ARRIVALLOCATIONActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -1191,7 +1197,7 @@
                     <Property name="text" type="java.lang.String" value="-"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="MONTH2">
+                <Component class="javax.swing.JComboBox" name="HOUR0">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Yu Gothic UI" size="18" style="0"/>
@@ -1214,7 +1220,7 @@
                     <Property name="text" type="java.lang.String" value="-"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="DAY2">
+                <Component class="javax.swing.JComboBox" name="MINUTE0">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Yu Gothic UI" size="18" style="0"/>
@@ -1225,6 +1231,9 @@
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MINUTE0ActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -1373,7 +1382,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel43" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="63" pref="63" max="-2" attributes="0"/>
-                                          <Component id="ContryTextField1" min="-2" pref="130" max="-2" attributes="0"/>
+                                          <Component id="CountryTextField1" min="-2" pref="130" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1422,7 +1431,7 @@
                           <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel43" min="-2" max="-2" attributes="0"/>
-                              <Component id="ContryTextField1" min="-2" max="-2" attributes="0"/>
+                              <Component id="CountryTextField1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="10" max="32767" attributes="0"/>
                           <Component id="UpdateButton" min="-2" max="-2" attributes="0"/>
@@ -1463,6 +1472,9 @@
                       <Font name="Yu Gothic UI" size="18" style="0"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FirstNameTextField1ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel38">
                   <Properties>
@@ -1570,7 +1582,7 @@
                     <Property name="text" type="java.lang.String" value="Country:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="ContryTextField1">
+                <Component class="javax.swing.JTextField" name="CountryTextField1">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Yu Gothic UI" size="18" style="0"/>
@@ -2124,7 +2136,7 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jButton7" min="-2" max="-2" attributes="0"/>
+                          <Component id="DelayButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="531" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -2148,7 +2160,7 @@
                               <Component id="MINUTE2" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="307" max="32767" attributes="0"/>
-                          <Component id="jButton7" min="-2" max="-2" attributes="0"/>
+                          <Component id="DelayButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -2230,7 +2242,7 @@
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton7">
+                <Component class="javax.swing.JButton" name="DelayButton">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Yu Gothic UI" size="18" style="0"/>
@@ -2238,7 +2250,7 @@
                     <Property name="text" type="java.lang.String" value="Delay"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DelayButtonActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
