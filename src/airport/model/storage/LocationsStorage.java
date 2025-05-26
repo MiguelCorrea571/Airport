@@ -5,13 +5,14 @@
 package airport.model.storage;
 
 import airport.model.Location;
+import airport.model.interfaces.DefaultLocationsInterface;
 import java.util.ArrayList;
 
 /**
  *
  * @author pc
  */
-public class LocationsStorage {
+public class LocationsStorage implements DefaultLocationsInterface{
 private static LocationsStorage instance;
 
     // Atributos del Storage
@@ -27,7 +28,7 @@ private static LocationsStorage instance;
         }
         return instance;
     }
-
+    @Override
     public boolean addLocation(Location location) {
         for (Location p : this.locations) {
             if (p.getAirportId().equals(location.getAirportId())) {
@@ -37,7 +38,7 @@ private static LocationsStorage instance;
         this.locations.add(location);
         return true;
     }
-
+    @Override
     public Location getLocation(String id) {
         for (Location location : this.locations) {
             if (location.getAirportId().equals(id)) {
@@ -46,7 +47,7 @@ private static LocationsStorage instance;
         }
         return null;
     }
-
+    @Override
     public boolean delLocation(String id) {
         for (Location location : this.locations) {
             if (location.getAirportId().equals(id)) {

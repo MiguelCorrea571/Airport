@@ -5,13 +5,14 @@
 package airport.model.storage;
 
 import airport.model.Passenger;
+import airport.model.interfaces.DefaultPassengersInterface;
 import java.util.ArrayList;
 
 /**
  *
  * @author pc
  */
-public class PassengersStorage {
+public class PassengersStorage implements DefaultPassengersInterface{
 
     private static PassengersStorage instance;
 
@@ -29,6 +30,8 @@ public class PassengersStorage {
         return instance;
     }
 
+    @Override
+
     public boolean addPassenger(Passenger passenger) {
         if (this.passengers.size() != 0) {
             for (Passenger p : this.passengers) {
@@ -41,6 +44,7 @@ public class PassengersStorage {
         return true;
     }
 
+    @Override
     public Passenger getPassenger(long id) {
         for (Passenger passenger : this.passengers) {
             if (passenger.getId() == id) {
@@ -50,6 +54,7 @@ public class PassengersStorage {
         return null;
     }
 
+    @Override
     public boolean delPassenger(long id) {
         for (Passenger passenger : this.passengers) {
             if (passenger.getId() == id) {

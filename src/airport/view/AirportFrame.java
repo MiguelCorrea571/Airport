@@ -23,7 +23,6 @@ import airport.model.storage.PassengersStorage;
 import airport.model.storage.PlanesStorage;
 import java.awt.Color;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -78,29 +77,29 @@ public class AirportFrame extends javax.swing.JFrame {
         this.generateMinutes();
         this.blockPanels();
         Loader();
-        JTabbedPane.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                int selectedindex = JTabbedPane.getSelectedIndex();
-                switch (selectedindex) {
-                    case 7: {
-                        RefreshButton.doClick();
-                    }
-                    case 8: {
-                        RefreshButton1.doClick();
-                    }
-                    case 9: {
-                        RefreshButton2.doClick();
-                    }
-                    case 10: {
-                        RefreshButton3.doClick();
-                    }
-                    case 11: {
-                        RefreshButton4.doClick();
-                    }
-
+        JTabbedPane.addChangeListener(new ChangeListener(){
+        public void stateChanged(ChangeEvent e){
+            int selectedindex = JTabbedPane.getSelectedIndex();
+            switch(selectedindex){
+                case 7:{
+                    RefreshButton.doClick();
                 }
+                case 8:{
+                    RefreshButton1.doClick();
+                }
+                case 9:{
+                    RefreshButton2.doClick();
+                }
+                case 10:{
+                    RefreshButton3.doClick();
+                }
+                case 11:{
+                    RefreshButton4.doClick();
+                }
+                    
             }
-        });
+        }
+    });
     }
 
     private void blockPanels() {
@@ -1498,8 +1497,8 @@ public class AirportFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public void Loader() {
+    
+    public void Loader(){
         LoadController.Load(PLANE, DEPARTURELOCATION, ARRIVALLOCATION, SCALELOCATION, ID, FLIGHT);
     }
     private void panelRound2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound2MousePressed
@@ -1521,8 +1520,8 @@ public class AirportFrame extends javax.swing.JFrame {
             JTabbedPane.setEnabledAt(i, true);
         }
         JTabbedPane.setEnabledAt(5, false);
-        JTabbedPane.setEnabledAt(6, false);
-        JTabbedPane.setEnabledAt(7, false);
+        JTabbedPane.setEnabledAt(6, false);        
+        JTabbedPane.setEnabledAt(7, false);        
     }//GEN-LAST:event_administratorActionPerformed
 
     private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
@@ -1565,81 +1564,69 @@ public class AirportFrame extends javax.swing.JFrame {
 
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
         try {
-            String idStr = IDTextField1.getText().trim();
-            String firstname = FirstNameTextField.getText().trim();
-            String lastname = LastNameTextField.getText().trim();
-            String yearStr = YEAR.getText().trim();
-            String monthStr = MONTH.getItemAt(MONTH.getSelectedIndex()).trim();
-            String dayStr = DAY.getItemAt(DAY.getSelectedIndex()).trim();
-            String phoneCodeStr = CountryCodeTextField.getText().trim();
-            String phoneStr = PhoneTextField.getText().trim();
-            String country = CountryTextField.getText().trim();
+    String idStr = IDTextField1.getText().trim();
+    String firstname = FirstNameTextField.getText().trim();
+    String lastname = LastNameTextField.getText().trim();
+    String yearStr = YEAR.getText().trim();
+    String monthStr = MONTH.getItemAt(MONTH.getSelectedIndex()).trim();
+    String dayStr = DAY.getItemAt(DAY.getSelectedIndex()).trim();
+    String phoneCodeStr = CountryCodeTextField.getText().trim();
+    String phoneStr = PhoneTextField.getText().trim();
+    String country = CountryTextField.getText().trim();
 
-            Response response = PassController.createPassenger(idStr, firstname, lastname, yearStr, monthStr, dayStr, phoneCodeStr, phoneStr, country);
-            if (response.getStatus() != Status.CREATED) {
-                JOptionPane.showMessageDialog(this, response.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+    Response response = PassController.createPassenger(idStr, firstname, lastname, yearStr, monthStr, dayStr, phoneCodeStr, phoneStr, country);
+    if (response.getStatus() != Status.CREATED) {
+        JOptionPane.showMessageDialog(this, response.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
-            long id = Long.parseLong(idStr);
-            int year = Integer.parseInt(yearStr);
-            int month = Integer.parseInt(monthStr);
-            int day = Integer.parseInt(dayStr);
-            int phoneCode = Integer.parseInt(phoneCodeStr);
-            long phone = Long.parseLong(phoneStr);
-            LocalDate birthDate = LocalDate.of(year, month, day);
+    long id = Long.parseLong(idStr);
+    int year = Integer.parseInt(yearStr);
+    int month = Integer.parseInt(monthStr);
+    int day = Integer.parseInt(dayStr);
+    int phoneCode = Integer.parseInt(phoneCodeStr);
+    long phone = Long.parseLong(phoneStr);
+    LocalDate birthDate = LocalDate.of(year, month, day);
 
-            Passenger p = PassController.createrPassenger(id, firstname, lastname, birthDate, phoneCode, phone, country);
-            this.passengers.addPassenger(p);
-            this.userSelect.addItem(String.valueOf(id));
+    Passenger p = PassController.createrPassenger(id, firstname, lastname, birthDate, phoneCode, phone, country);
+    this.passengers.addPassenger(p);
+    this.userSelect.addItem(String.valueOf(id));
 
-            File file = new File("json/passengers.json");
-            File dir = file.getParentFile();
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-
-            // Leer contenido actual
-            StringBuilder content = new StringBuilder();
-            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    content.append(line.trim());
+    File file = new File("json/passengers.json");
+            JSONArray passengerArray;
+            if (file.exists()) {
+                try (InputStream is = new FileInputStream(file)) {
+                    JSONTokener tokener = new JSONTokener(is);
+                    passengerArray = new JSONArray(tokener);
                 }
+            } else {
+                file.getParentFile().mkdirs(); // crear carpeta si no existe
+                passengerArray = new JSONArray();
+            }
+            JSONObject passengerObject = new JSONObject();
+            passengerObject.put("id", idStr);
+            passengerObject.put("firstname", firstname);
+            passengerObject.put("lastname", lastname);
+            passengerObject.put("birthDate", birthDate);            
+            passengerObject.put("countryPhoneCode", phoneCodeStr);
+            passengerObject.put("phone", phoneStr);
+            passengerObject.put("country", country);
+
+            passengerArray.put(passengerObject);
+
+            try (FileWriter writer = new FileWriter(file)) {
+                writer.write(passengerArray.toString(4));
             }
 
-            boolean addComma = content.length() > 0;
+    JOptionPane.showMessageDialog(this, "Pasajero registrado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
-            // Crear nuevo objeto en formato requerido
-            JSONObject newPassenger = new JSONObject();
-            newPassenger.put("country", country);
-            newPassenger.put("firstname", firstname);
-            newPassenger.put("countryPhoneCode", phoneCode);
-            newPassenger.put("phone", phone);
-            newPassenger.put("id", id);
-            newPassenger.put("birthDate", birthDate.toString());
-            newPassenger.put("lastname", lastname);
-
-            // Escribir el objeto al archivo
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-                if (addComma) {
-                    writer.write(",\n");
-                }
-                writer.write(newPassenger.toString(4)); // indentado
-            }
-
-            JOptionPane.showMessageDialog(this, "Pasajero registrado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Error de formato numérico: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (DateTimeException e) {
-            JOptionPane.showMessageDialog(this, "Fecha de nacimiento inválida: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error al escribir en el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(this, "Error de formato numérico: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+} catch (DateTimeException e) {
+    JOptionPane.showMessageDialog(this, "Fecha de nacimiento inválida: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+} catch (IOException e) {
+    JOptionPane.showMessageDialog(this, "Error al escribir en el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+}
 
 
     }//GEN-LAST:event_RegisterButtonActionPerformed
@@ -1657,7 +1644,7 @@ public class AirportFrame extends javax.swing.JFrame {
                 return;
             }
             int maxCapacity = Integer.parseInt(maxCapacityStr);
-            this.planes.addPlane(new Plane(id, brand, model, maxCapacity, airline));
+            this.planes.addPlane(new Plane(id, brand, model, maxCapacity, airline));            
             System.out.println(id);
             this.PLANE.addItem(id);
 
@@ -1856,7 +1843,7 @@ public class AirportFrame extends javax.swing.JFrame {
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
         // TODO add your handling code here:
-        String idStr = IDTextField4.getText();
+        String idStr = IDTextField4.getText();        
         String firstname = FirstNameTextField1.getText();
         String lastname = LastNameTextField1.getText();
         String yearStr = YEAR2.getText();
@@ -1866,8 +1853,8 @@ public class AirportFrame extends javax.swing.JFrame {
         String phoneStr = PhoneTextField1.getText();
         String country = CountryTextField1.getText();
 
-        Response response = UpdateInfor.validateAndUpdate(idStr, firstname, lastname, yearStr, monthStr, dayStr, phoneCodeStr, phoneStr, country);
-        System.out.println("RESPUESTA" + response.getMessage());
+        Response response = UpdateInfor.validateAndUpdate(idStr, firstname, lastname,yearStr, monthStr, dayStr,phoneCodeStr, phoneStr, country);
+        System.out.println("RESPUESTA"+response.getMessage());
         if (response.getStatus() != Status.CREATED) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
             return;
@@ -1882,7 +1869,7 @@ public class AirportFrame extends javax.swing.JFrame {
         LocalDate birthDate = LocalDate.of(year, month, day);
 
         File file = new File("json/passengers.json");
-        System.out.println("ruta " + file.getAbsolutePath());
+        System.out.println("ruta "+file.getAbsolutePath());
         if (!file.exists()) {
             JOptionPane.showMessageDialog(null, "No se encontró el archivo passengers.json", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -1891,7 +1878,7 @@ public class AirportFrame extends javax.swing.JFrame {
         JSONArray passengersArray;
         try (InputStream is = new FileInputStream(file)) {
             passengersArray = new JSONArray(new JSONTokener(is));
-        } catch (IOException | JSONException e) {
+        } catch (IOException | JSONException e) {            
             JOptionPane.showMessageDialog(null, "Error leyendo archivo JSON: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }

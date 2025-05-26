@@ -5,13 +5,14 @@
 package airport.model.storage;
 
 import airport.model.Plane;
+import airport.model.interfaces.DefaultPlaneInterface;
 import java.util.ArrayList;
 
 /**
  *
  * @author pc
  */
-public class PlanesStorage {
+public class PlanesStorage implements DefaultPlaneInterface{
 
     private static PlanesStorage instance;
 
@@ -28,7 +29,7 @@ public class PlanesStorage {
         }
         return instance;
     }
-
+    @Override
     public boolean addPlane(Plane plane) {
         for (Plane p : this.planes) {
             if (p.getId().equals(plane.getId())) {
@@ -38,7 +39,7 @@ public class PlanesStorage {
         this.planes.add(plane);
         return true;
     }
-
+    @Override
     public Plane getPlane(String id) {
         for (Plane plane : this.planes) {
             if (plane.getId().equals(id)) {
@@ -47,7 +48,7 @@ public class PlanesStorage {
         }
         return null;
     }
-
+    @Override
     public boolean delPlane(String id) {
         for (Plane plane : this.planes) {
             if (plane.getId().equals(id)) {

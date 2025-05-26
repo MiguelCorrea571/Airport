@@ -4,10 +4,9 @@
         "minutesDurationScale": 0,
         "departureLocation": "JFK",
         "scaleLocation": null,
-        "registeredPassengers": "158484546,28171784",
         "minutesDurationArrival": 15,
         "id": "FLY001",
-        "departureDate": "2025-06-01T15:35:00",
+        "departureDate": "2025-06-01T14:30:00",
         "hoursDurationScale": 0,
         "arrivalLocation": "LHR",
         "hoursDurationArrival": 7
@@ -41,6 +40,7 @@
         "minutesDurationScale": 0,
         "departureLocation": "SYD",
         "scaleLocation": null,
+        "registeredPassengers": "753951852",
         "minutesDurationArrival": 0,
         "id": "AIR304",
         "departureDate": "2025-06-04T16:45:00",
@@ -143,17 +143,5 @@
         "hoursDurationScale": 0,
         "arrivalLocation": "DUB",
         "hoursDurationArrival": 2
-    },
-    {
-        "plane": "AB75365",
-        "minutesDurationScale": 4,
-        "departureLocation": "MND",
-        "scaleLocation": "MND",
-        "minutesDurationArrival": 4,
-        "id": "ABC520",
-        "departureDate": "2002-02-04T02:02",
-        "hoursDurationScale": 2,
-        "arrivalLocation": "MND",
-        "hoursDurationArrival": 3
     }
 ]
